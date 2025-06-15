@@ -5,6 +5,7 @@ Features:
 - No delay
 - V1
 - drag and drop systeme
+- Header Rotatif Système
 
 SCREEN:
 
